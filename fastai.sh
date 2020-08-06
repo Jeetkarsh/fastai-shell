@@ -49,26 +49,6 @@ test-zone () {
     zone_for_exiting=$(gcloud compute --project=$DEVSHELL_PROJECT_ID instances list | grep zone-tester | sed 's/  */ /g' | cut -d ' ' -f2)
     gcloud compute --project=$DEVSHELL_PROJECT_ID -q instances delete zone-tester --zone $zone_for_exiting
   fi
-
-  echo "Creating zone-tester instance for zone: $zone with GPU: $gpu"
-  gcloud compute instances create zone-tester \
-      --project=$DEVSHELL_PROJECT_ID \
-      --zone=$zone \
-      --subnet=fastai-net \
-      --network-tier=PREMIUM \
-      --machine-type="n1-highcpu-4" \
-      --accelerator="type=nvidia-tesla-$gpu,count=1" \
-      --image-family="pytorch-latest-gpu" \
-      --image-project=deeplearning-platform-release \
-      --maintenance-policy=TERMINATE \
-      --boot-disk-size=30GB \
-      --boot-disk-type=pd-ssd \
-      --boot-disk-device-name=zone-tester
-
-  echo ""
-  echo "The zone: $zone has enough resources for the $gpu GPU."
-  echo ""
-
   echo "Deleting zone-tester instance"
   gcloud compute --project=$DEVSHELL_PROJECT_ID -q instances delete zone-tester --zone=$zone
 }
@@ -92,13 +72,6 @@ create_disk_from_snapshot () {
 }
 
 list-zones () {
-  echo ""
-  echo "Current zone: $current_zone"
-  echo ""
-  for z in "${!GPUS_IN_ZONES[@]}"; do
-    echo " * $z (available gpus: ${GPUS_IN_ZONES[$z]})"
-  done
-  echo ""
 }
 
 switch-to () {
@@ -303,11 +276,6 @@ start () {
   echo "Current zone: $current_zone"
   echo "Run one of the following commands:"
   echo ""
-
-  gpus=(${GPUS_IN_ZONES[$current_zone]})
-  for gpu in ${gpus[@]}; do
-    echo " * fastai $gpu ($gpu gpu, ${SYSTEM_FOR_GPU[$gpu]} - \$${PRICE_FOR_GPU[$gpu]}/hour)"
-  done
   echo " * fastai nogpu (1cpu, 3.75GB RAM - \$0.02/hour)"
   echo ""
 
