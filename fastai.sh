@@ -72,7 +72,7 @@ create_disk_from_snapshot () {
 }
 
 list-zones () {
-echo ""
+  echo ""
 }
 
 switch-to () {
