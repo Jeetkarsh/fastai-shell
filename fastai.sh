@@ -86,21 +86,6 @@ switch-to () {
     return 1
   fi
 
-  if [[ "${GPUS_IN_ZONES[$zone]}" == "" ]]; then
-    echo ""
-    echo "Fastai shell does not support the zone: '$zone'"
-    echo "Use one of the following zones:"
-    echo ""
-
-    for z in "${!GPUS_IN_ZONES[@]}"; do
-      echo " * $z"
-    done
-
-    echo ""
-
-    return 1
-  fi
-
   echo "Stop the current instance, if exists"
   stop
 
