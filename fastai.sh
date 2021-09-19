@@ -155,7 +155,6 @@ create_boot_instance () {
       --subnet=fastai-net \
       --network-tier=PREMIUM \
       --machine-type="n1-highcpu-8" \
-      --accelerator="type=nvidia-tesla-k80,count=1" \
       --image-family="ubuntu-1804-lts" \
       --image-project=ubuntu-os-cloud \
       --maintenance-policy=TERMINATE \
