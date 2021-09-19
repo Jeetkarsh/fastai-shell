@@ -125,6 +125,8 @@ At anytime, you can run the following command to get the latest version:
 
 ```
 curl -L https://raw.githubusercontent.com/Jeetkarsh/fastai-shell/main/install.sh | bash
+source ~/.bashrc
+
 ```
 
 You can check the installed version by typing: `fastai version`

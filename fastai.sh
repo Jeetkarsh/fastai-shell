@@ -271,7 +271,7 @@ show_jupyter_link () {
 
 start_instance() {
   machine_type=$1
-  gpu_type = "nogpu"
+  gpu_type = $2
 
   set +e
   instance_count=$(gcloud compute --project=$DEVSHELL_PROJECT_ID instances list | grep -c fastai-1)
