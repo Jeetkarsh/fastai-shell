@@ -11,5 +11,5 @@ fi
 
 # Download and install the fastai script
 mkdir -p ~/.fastai/bin
-curl https://raw.githubusercontent.com/arunoda/fastai-shell/master/fastai.sh?__ts=$RANDOM -o ~/.fastai/bin/fastai
+curl https://raw.githubusercontent.com/Jeetkarsh/fastai-shell/main/fastai.sh -o ~/.fastai/bin/fastai
 chmod +x ~/.fastai/bin/fastai
